@@ -1,0 +1,24 @@
+[
+  {
+    "id": "1",
+    "displayName": "MacBook Pro",
+    "modelName": "NewMac",
+    "audio": null,
+    "image": "macbook.gen2"
+  },
+  {
+    "id": "2",
+    "displayName": "Coffee",
+    "modelName": "Paper_Coffee_Cup",
+    "audio": null,
+    "image": "cup.and.saucer.fill"
+  },
+  {
+    "id": "3",
+    "displayName": "Notebook",
+    "modelName": "Notebook",
+    "audio": null,
+    "image": "pencil.and.list.clipboard"
+  }
+]
+
