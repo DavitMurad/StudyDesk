@@ -29,15 +29,25 @@ struct ARViewContainer: UIViewRepresentable {
     func updateUIView(_ uiView: ARView, context: Context) {
         guard let modelName = modelName else { return }
 
+        let center = CGPoint(x: uiView.bounds.midX, y: uiView.bounds.midY)
+
+        let results = uiView.raycast(
+            from: center,
+            allowing: .existingPlaneGeometry,
+            alignment: .horizontal
+        )
+
+        guard let firstResult = results.first else {
+            print("No horizontal plane detected.")
+            return
+        }
+
         Task {
             do {
                 let entity = try await Entity(named: modelName, in: .main)
                 entity.generateCollisionShapes(recursive: true)
-                entity.scale = SIMD3<Float>(0.2, 0.2, 0.2)         // Smaller size
-                entity.orientation = simd_quatf(angle: .pi / 4, axis: [0, 1, 0]) // Y-axis rotation
-                entity.position = SIMD3<Float>(0, 0, 0) 
-
-                let anchor = AnchorEntity(plane: .horizontal)
+                
+                let anchor = AnchorEntity(world: firstResult.worldTransform)
                 anchor.addChild(entity)
                 uiView.scene.anchors.append(anchor)
             } catch {
@@ -45,7 +55,6 @@ struct ARViewContainer: UIViewRepresentable {
             }
         }
     }
-
     func makeCoordinator() -> Coordinator {
         Coordinator()
     }

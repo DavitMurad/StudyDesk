@@ -9,7 +9,7 @@
   {
     "id": "2",
     "displayName": "Coffee",
-    "modelName": "Paper_Coffee_Cup",
+    "modelName": "Coffee",
     "audio": null,
     "image": "cup.and.saucer.fill"
   },
@@ -19,6 +19,27 @@
     "modelName": "Notebook",
     "audio": null,
     "image": "pencil.and.list.clipboard"
+  },
+  {
+    "id": "4",
+    "displayName": "iPhone",
+    "modelName": "iPhone",
+    "audio": null,
+    "image": "iphone.gen3"
+  },
+  {
+    "id": "5",
+    "displayName": "AirPods",
+    "modelName": "AirPods",
+    "audio": null,
+    "image": "airpods.pro.chargingcase.wireless.fill"
+  },
+  {
+    "id": "6",
+    "displayName": "Pen",
+    "modelName": "Pen",
+    "audio": null,
+    "image": "pencil.and.scribble"
   }
 ]
 

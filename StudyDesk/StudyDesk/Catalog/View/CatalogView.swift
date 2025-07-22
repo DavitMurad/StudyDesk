@@ -8,11 +8,84 @@
 import SwiftUI
 
 struct CatalogView: View {
+    @ObservedObject var arVM = ARViewModel()
+    @State var magnificationValue = 1.0
+    @State var itemAngle = 0.0 // Changed to Double for smoother animation
+    
+    let columns = [
+        GridItem(.adaptive(minimum: 120), spacing: 20)
+    ]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            LazyVGrid(columns: columns, spacing: 20) {
+                Section {
+                    ForEach(arVM.items) { item in
+                        VStack(spacing: 10) {
+                            Image(systemName: item.image)
+                                .font(.title)
+                                .foregroundColor(.primary)
+                            
+                            Text(item.displayName)
+                                .font(.footnote)
+                                .fontWeight(.semibold)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.primary)
+                            
+                            Button {
+                                
+                            } label: {
+                                Image(systemName: "heart")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(.white)
+                                .shadow(color: .black.opacity(0.05), radius: 6, x: 0, y: 4)
+                        )
+                        .rotation3DEffect(.degrees(itemAngle), axis: (x: 1, y: 0, z: 0))
+                        
+                        // .scaleEffect(magnificationValue)
+                        // .gesture(
+                        //     MagnificationGesture()
+                        //         .onChanged({ value in
+                        //             magnificationValue = value
+                        //         })
+                        //         .onEnded({ value in
+                        //             magnificationValue = 1
+                        //         })
+                        // )
+                    }
+                } header: {
+                    HStack {
+                        Text("Catalog")
+                            .font(.largeTitle).bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.bottom, 10)
+                        
+                        Button("Randomize") {
+                            withAnimation(.easeInOut(duration: 0.6)) {
+                                arVM.items = arVM.items.shuffled()
+                                itemAngle = 360
+                            }
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                itemAngle = 0
+                            }
+                        }
+                    }
+                }
+            }
+            .padding()
+        }
+        .background(Color(.systemGroupedBackground).ignoresSafeArea())
     }
 }
 
-#Preview {
-    CatalogView()
-}
+//
+//#Preview {
+//    CatalogView()
+//}

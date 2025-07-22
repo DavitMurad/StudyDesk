@@ -38,6 +38,5 @@ class ARViewModel: ObservableObject {
                     self?.items = loadedItem
                 }
                 .store(in: &cancellable)
-
     }
 }
