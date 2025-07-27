@@ -36,12 +36,12 @@ struct ARViewContainer: UIViewRepresentable {
             allowing: .existingPlaneGeometry,
             alignment: .horizontal
         )
-
+        
         guard let firstResult = results.first else {
             print("No horizontal plane detected.")
             return
         }
-
+        
         Task {
             do {
                 let entity = try await Entity(named: modelName, in: .main)
@@ -58,8 +58,23 @@ struct ARViewContainer: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator()
     }
-
+    
     class Coordinator {
         var arView: ARView?
+        
+        func cleanup() {
+            guard let arView = arView else { return }
+            arView.session.pause()
+            arView.scene.anchors.removeAll()
+            self.arView = nil
+        }
+
+        func pauseARSession() {
+            arView?.session.pause()
+        }
+    }
+    
+    static func dismantleUIView(_ uiView: ARView, coordinator: Coordinator) {
+        coordinator.cleanup()
     }
 }

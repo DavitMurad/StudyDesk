@@ -11,7 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		27308E8B2E2837B400A4867A /* StudyDesk */ = {
+		273092442E304C1C00A4867A /* StudyDesk */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = StudyDesk;
 			sourceTree = "<group>";
@@ -32,7 +32,7 @@
 		27308E802E2837B400A4867A = {
 			isa = PBXGroup;
 			children = (
-				27308E8B2E2837B400A4867A /* StudyDesk */,
+				273092442E304C1C00A4867A /* StudyDesk */,
 				27308E8A2E2837B400A4867A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,7 +61,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				27308E8B2E2837B400A4867A /* StudyDesk */,
+				273092442E304C1C00A4867A /* StudyDesk */,
 			);
 			name = StudyDesk;
 			packageProductDependencies = (

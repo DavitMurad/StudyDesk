@@ -8,30 +8,60 @@
 import SwiftUI
 
 struct ARMainView: View {
-    @State var isSheetPresent = false
-    @State var modelName: String? = nil
+    @State private var isSheetPresented = false
+    @State private var modelName: String? = nil
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         ZStack {
-            ARViewContainer(modelName: $modelName).ignoresSafeArea(edges: [.top, .horizontal])
-            
+            ARViewContainer(modelName: $modelName)
+                .ignoresSafeArea()
+
             VStack {
-                Text(modelName ?? "nil")
-                Button {
-                    isSheetPresent.toggle()
-                } label: {
-                    Image(systemName: "square.grid.2x2")
-                        .font(.title)
-                    
+                HStack {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "chevron.backward")
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .padding(12)
+                            .background(Color.black.opacity(0.5))
+                            .clipShape(Circle())
+                    }
+
+                    Spacer()
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .padding()
+                .padding(.top, 50)
+                .padding(.horizontal)
+
+                Spacer()
+            }
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        isSheetPresented = true
+                    }) {
+                        Image(systemName: "square.grid.2x2.fill")
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .clipShape(Circle())
+                            .shadow(radius: 10)
+                    }
+                    .padding()
+                }
             }
         }
-        .sheet(isPresented: $isSheetPresent) {
+        .sheet(isPresented: $isSheetPresented) {
             CatalogSheet(modelName: $modelName)
         }
     }
 }
+
 
 struct CatalogSheet: View {
     @ObservedObject var ARvm = ARViewModel()

@@ -10,33 +10,51 @@ import Combine
 
 class ARViewModel: ObservableObject {
     @Published var items: [ARItem] = []
-    private var cancellable = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
     
     init() {
         getData()
     }
     
+//    func getData() {
+//        guard let url = Bundle.main.url(forResource: "Items", withExtension: "json") else { return }
+//            Just(url)
+//                .subscribe(on: DispatchQueue.global())
+//                .receive(on: DispatchQueue.main)
+//                .tryMap { url -> Data in
+//                    try Data(contentsOf: url)
+//                }
+//                .decode(type: [ARItem].self, decoder: JSONDecoder())
+//                .sink { completion in
+//                    switch completion {
+//                        
+//                    case .finished:
+//                        print("Successfully loaded local data")
+//                    case .failure (let error):
+//                        print("Error loading local data: \(error)")
+//
+//                    }
+//                } receiveValue: { [weak self] loadedItem in
+//                    self?.items = loadedItem
+//                }
+//                .store(in: &cancellable)
+//    }
+    
     func getData() {
-        guard let url = Bundle.main.url(forResource: "Items", withExtension: "json") else { return }
-            Just(url)
-                .subscribe(on: DispatchQueue.global())
-                .receive(on: DispatchQueue.main)
-                .tryMap { url -> Data in
-                    try Data(contentsOf: url)
-                }
-                .decode(type: [ARItem].self, decoder: JSONDecoder())
-                .sink { completion in
-                    switch completion {
-                        
-                    case .finished:
-                        print("Successfully loaded local data")
-                    case .failure (let error):
-                        print("Error loading local data: \(error)")
-
-                    }
-                } receiveValue: { [weak self] loadedItem in
-                    self?.items = loadedItem
-                }
-                .store(in: &cancellable)
-    }
+           ModelFetcher.shared.fetchModel(name: "Items")
+               .subscribe(on: DispatchQueue.global())
+               .receive(on: DispatchQueue.main)
+               .decode(type: [ARItem].self, decoder: JSONDecoder())
+               .sink { completion in
+                   switch completion {
+                   case .finished:
+                       print("Successfully loaded data with caching")
+                   case .failure(let error):
+                       print("Error loading data: \(error)")
+                   }
+               } receiveValue: { [weak self] loadedItems in
+                   self?.items = loadedItems
+               }
+               .store(in: &cancellables)
+       }
 }

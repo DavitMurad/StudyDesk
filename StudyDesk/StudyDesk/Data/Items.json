@@ -4,42 +4,55 @@
     "displayName": "MacBook Pro",
     "modelName": "NewMac",
     "audio": null,
-    "image": "macbook.gen2"
+    "image": "macbook.gen2",
+    "liked": false,
+    "description": "Your digital everything. From 8 a.m. lectures to 2 a.m. debugging sessions, this is the hub of every student hustle."
   },
   {
     "id": "2",
     "displayName": "Coffee",
     "modelName": "Coffee",
     "audio": null,
-    "image": "cup.and.saucer.fill"
+    "image": "cup.and.saucer.fill",
+    "liked": false,
+    "description": "For those “just one more chapter” or “just one more hour” moments. A little caffeine magic to survive 9 a.m. classes and late-night grind sessions."
   },
   {
     "id": "3",
     "displayName": "Notebook",
     "modelName": "Notebook",
     "audio": null,
-    "image": "pencil.and.list.clipboard"
+    "image": "pencil.and.list.clipboard",
+    "liked": false,
+    "description": "Some ideas are better written by hand. Whether it’s messy sketches, lecture notes, or deep thoughts during a boring seminar, this little guy’s got your back."
   },
   {
     "id": "4",
     "displayName": "iPhone",
     "modelName": "iPhone",
     "audio": null,
-    "image": "iphone.gen3"
+    "image": "iphone.gen3",
+    "liked": false,
+    "description": "Your second brain, group chat HQ, and emergency deadline reminder. Try not to scroll too long during study breaks."
   },
   {
     "id": "5",
     "displayName": "AirPods",
     "modelName": "AirPods",
     "audio": null,
-    "image": "airpods.pro.chargingcase.wireless.fill"
+    "image": "airpods.pro.chargingcase.wireless.fill",
+    "liked": false,
+    "description": "Not just for vibing in the library, these are noise-cancelling shields from chaos. Use them wisely (and don’t lose the case)."
   },
   {
     "id": "6",
     "displayName": "Pen",
     "modelName": "Pen",
     "audio": null,
-    "image": "pencil.and.scribble"
+    "image": "pencil.and.scribble",
+    "liked": false,
+    "description": "The underrated hero of your backpack. Doesn’t need charging, doesn’t crash, and always there when you panic mid-exam."
+    
   }
 ]
 

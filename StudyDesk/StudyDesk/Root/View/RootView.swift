@@ -11,10 +11,11 @@ struct RootView: View {
     var body: some View {
         TabView {
             Tab("Place", systemImage: "camera.viewfinder") {
-                ARMainView()
+                PlaceLauncherView()
             }
             Tab("Catalog", systemImage: "square.grid.2x2") {
                 CatalogView()
+                    .environmentObject(ARViewModel())
             }
             Tab("Favourites", systemImage: "heart.fill") {
                 FavouritesView()

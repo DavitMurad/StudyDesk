@@ -1,0 +1,21 @@
+//
+//  CatalogViewModel.swift
+//  StudyDesk
+//
+//  Created by Davit Muradyan on 24.07.25.
+//
+
+import Foundation
+
+class CatalogViewModel: ObservableObject {
+   @Published var modifiedItem: [ARItem] = []
+    
+    func determineCurrentView(arVM: ARViewModel,item: ARItem) {
+        var modifiedItems = arVM.items
+        
+        modifiedItems.removeAll(where: {$0 == item})
+        modifiedItems.insert(item, at: 0)
+        
+        self.modifiedItem = modifiedItems
+    }
+}
