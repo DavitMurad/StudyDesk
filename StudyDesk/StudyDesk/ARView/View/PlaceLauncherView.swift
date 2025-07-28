@@ -8,25 +8,51 @@
 import SwiftUI
 struct PlaceLauncherView: View {
     @State private var showAR = false
-
+    @State private var imageOffset: CGSize = .zero
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Ready to start placing models?")
-                .font(.title)
-                .multilineTextAlignment(.center)
-                .padding()
-
-            Button(action: {
-                showAR = true
-            }) {
-                Label("Start AR Experience", systemImage: "arkit")
-                    .font(.headline)
-                    .padding()
+        ScrollView {
+            VStack(spacing: 20) {
+                Spacer()
+                Image("ar")
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
                     .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
+                    .frame(height: 300)
                     .padding(.horizontal)
+                    .offset(imageOffset)
+                    .gesture(
+                        DragGesture()
+                            .onChanged({ value in
+                                withAnimation(.spring) {
+                                    if value.translation.height < 70 &&  value.translation.height > -100   {
+                                        imageOffset = value.translation
+                                    }
+                                }
+                            })
+                            .onEnded({ value in
+                                withAnimation(.spring) {
+                                    imageOffset = .zero
+                                }
+                            })
+                    )
+                Text("Ready to start placing models?")
+                    .font(.title)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                
+                Button(action: {
+                    showAR = true
+                }) {
+                    Label("Start AR Experience", systemImage: "arkit")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color("CustomBlue").gradient)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                }
             }
         }
         .fullScreenCover(isPresented: $showAR) {

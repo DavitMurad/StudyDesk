@@ -16,6 +16,8 @@ struct ARMainView: View {
         ZStack {
             ARViewContainer(modelName: $modelName)
                 .ignoresSafeArea()
+            
+            Text("Go to Catalog and select desired student essentials!")
 
             VStack {
                 HStack {
@@ -63,47 +65,7 @@ struct ARMainView: View {
 }
 
 
-struct CatalogSheet: View {
-    @ObservedObject var ARvm = ARViewModel()
-    @Binding var modelName: String?
-    @Environment(\.dismiss) var dismiss
 
-    var body: some View {
-        LazyVStack {
-            ForEach(ARvm.items) { item in
-                ZStack {
-                    RoundedRectangle(cornerRadius: 15)
-                        .fill(Color.white)
-                        .frame(height: 75)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .shadow(radius: 10)
-                    
-                    HStack {
-                        Image(systemName: item.image)
-                            .frame(width: 50, height: 50)
-                            .background(.white)
-                            .clipShape(Circle())
-                            .shadow(radius: 5)
-                            .padding()
-                            .padding(.horizontal, 10)
-                         
-                         
-                        Text(item.displayName)
-                            .font(.headline)
-                        Spacer()
-                        
-                    }
-                   
-                }
-                .onTapGesture {
-                    modelName = item.modelName
-                    dismiss()
-                }
-            }
-        }
-    }
-}
 //
 //#Preview {
 //    CatalogSheet()

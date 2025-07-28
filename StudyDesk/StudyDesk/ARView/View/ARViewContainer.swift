@@ -45,6 +45,9 @@ struct ARViewContainer: UIViewRepresentable {
         Task {
             do {
                 let entity = try await Entity(named: modelName, in: .main)
+                entity.position = .zero
+                entity.orientation = simd_quatf()
+                entity.transform.translation = [0, 0, 0]
                 entity.generateCollisionShapes(recursive: true)
                 
                 let anchor = AnchorEntity(world: firstResult.worldTransform)

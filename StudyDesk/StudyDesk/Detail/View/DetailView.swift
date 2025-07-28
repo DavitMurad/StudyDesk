@@ -22,9 +22,9 @@ struct DetailView: View {
                         ExtractedView(geom: geom, item: item, modelName: $modelName)
                             .environmentObject(catalogVM)
                             .environmentObject(arVM)
-                            .onAppear {
-                                catalogVM.determineCurrentView(arVM: arVM, item: item)
-                            }
+//                            .onAppear {
+//                                catalogVM.determineCurrentView(arVM: arVM, item: item)
+//                            }
                             .frame(width: geom.size.width)
                     }
                 }
@@ -34,12 +34,10 @@ struct DetailView: View {
             .scrollBounceBehavior(.basedOnSize)
         }
         .onAppear {
-            if let item = currentItem {
+            if let item = currentItem, catalogVM.modifiedItem.isEmpty {
                 modelName = item.modelName
-                
                 catalogVM.determineCurrentView(arVM: arVM, item: item)
             }
-            
         }
     }
 }
@@ -60,7 +58,7 @@ struct ExtractedView: View {
     var body: some View {
         VStack {
             Text(modelName ?? "nil")
-            ARViewContainer(modelName: $modelName)
+            USDZQuickLook(modelName: item.modelName)
                 .frame(height: geom.size.height / 2)
                 .ignoresSafeArea(edges: [.top])
             
