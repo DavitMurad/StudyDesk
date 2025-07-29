@@ -21,6 +21,9 @@ struct RootView: View {
                 FavouritesView()
             }
         }
+        .tint(Color("CustomBlue"))
+        .environmentObject(ARViewModel())
+
     }
 }
 

@@ -36,15 +36,15 @@ struct PlaceLauncherView: View {
                                 }
                             })
                     )
-                Text("Ready to start placing models?")
-                    .font(.title)
+                Text("Grab your Mac, coffee, and questionable motivation. Let’s go.")
+                    .font(.title2)
                     .multilineTextAlignment(.center)
                     .padding()
                 
                 Button(action: {
                     showAR = true
                 }) {
-                    Label("Start AR Experience", systemImage: "arkit")
+                    Label("Start Setting Up Your Desk", systemImage: "arkit")
                         .font(.headline)
                         .padding()
                         .frame(maxWidth: .infinity)

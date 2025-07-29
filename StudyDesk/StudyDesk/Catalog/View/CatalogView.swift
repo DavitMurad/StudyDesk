@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct CatalogView: View {
-    @ObservedObject var arVM = ARViewModel()
+    @EnvironmentObject var arVM: ARViewModel
+    @ObservedObject var favouritesViewModel = FavouritesViewModel()
     @State var itemAngle = 0.0
+
     let columns = [
         GridItem(.adaptive(minimum: 120), spacing: 20)
     ]
@@ -26,7 +28,7 @@ struct CatalogView: View {
                                 VStack(spacing: 10) {
                                     Image(systemName: item.image)
                                         .font(.title)
-                                        .foregroundColor(.primary)
+                                        .foregroundColor(Color("CustomBlue"))
                                     
                                     Text(item.displayName)
                                         .font(.footnote)
@@ -45,10 +47,11 @@ struct CatalogView: View {
                                 .overlay(
                                     
                                     Button {
-                                        
+                                        arVM.like(item: item)
                                     } label: {
-                                        Image(systemName: "heart")
-                                            .foregroundColor(.gray)
+                                        
+                                        Image(systemName: item.liked ? "heart.fill" : "heart")
+                                            .foregroundColor(item.liked ? .red : .gray)
                                     }
                                     .padding(8),
                                     alignment: .topTrailing

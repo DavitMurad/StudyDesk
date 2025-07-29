@@ -17,9 +17,10 @@ struct ARMainView: View {
             ARViewContainer(modelName: $modelName)
                 .ignoresSafeArea()
             
-            Text("Go to Catalog and select desired student essentials!")
 
             VStack {
+         
+
                 HStack {
                     Button(action: {
                         dismiss()
@@ -27,12 +28,20 @@ struct ARMainView: View {
                         Image(systemName: "chevron.backward")
                             .font(.title)
                             .foregroundColor(.white)
-                            .padding(12)
+                            .padding(10)
                             .background(Color.black.opacity(0.5))
                             .clipShape(Circle())
                     }
-
-                    Spacer()
+                    Text("Tap the Catalog. Yes, it has more than just hopes and dreams.")
+                        .font(.subheadline)
+                        .multilineTextAlignment(.leading)
+                        .minimumScaleFactor(0.8)
+                        .padding()
+                        .frame(height: 75)
+                        .background(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .opacity(modelName == nil ? 1:0)
+                        
                 }
                 .padding(.top, 50)
                 .padding(.horizontal)
@@ -50,7 +59,7 @@ struct ARMainView: View {
                             .font(.title)
                             .foregroundColor(.white)
                             .padding()
-                            .background(Color.blue)
+                            .background(Color("CustomBlue"))
                             .clipShape(Circle())
                             .shadow(radius: 10)
                     }
@@ -65,8 +74,6 @@ struct ARMainView: View {
 }
 
 
-
-//
 //#Preview {
-//    CatalogSheet()
+//    ARMainView()
 //}

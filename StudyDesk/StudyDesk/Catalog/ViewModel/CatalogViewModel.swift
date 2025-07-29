@@ -6,18 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
 
 class CatalogViewModel: ObservableObject {
-   @Published var modifiedItem: [ARItem] = []
     
-    func determineCurrentView(arVM: ARViewModel,item: ARItem) {
-        var modifiedItems = arVM.items
-        modifiedItems.removeAll(where: {$0 == item})
-        modifiedItems.insert(item, at: 0)
-        for i in 0..<modifiedItems.count {
-            modifiedItems[i].modelName.append("Centered")
-        }
-        
-        self.modifiedItem = modifiedItems
-    }
 }

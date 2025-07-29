@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailView: View {
     @EnvironmentObject var arVM: ARViewModel
     @Environment(\.dismiss) var dismiss
-    @StateObject var catalogVM = CatalogViewModel()
+    @StateObject var detailVM = DetailViewModel()
     @State var modelName: String? = nil
     var currentItem: ARItem?
     var body: some View {
@@ -18,13 +18,10 @@ struct DetailView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 0) {
-                    ForEach(catalogVM.modifiedItem) { item in
+                    ForEach(detailVM.modifiedItem) { item in
                         ExtractedView(geom: geom, item: item, modelName: $modelName)
-                            .environmentObject(catalogVM)
+                            .environmentObject(detailVM)
                             .environmentObject(arVM)
-//                            .onAppear {
-//                                catalogVM.determineCurrentView(arVM: arVM, item: item)
-//                            }
                             .frame(width: geom.size.width)
                     }
                 }
@@ -34,9 +31,9 @@ struct DetailView: View {
             .scrollBounceBehavior(.basedOnSize)
         }
         .onAppear {
-            if let item = currentItem, catalogVM.modifiedItem.isEmpty {
+            if let item = currentItem, detailVM.modifiedItem.isEmpty {
                 modelName = item.modelName
-                catalogVM.determineCurrentView(arVM: arVM, item: item)
+                detailVM.determineCurrentView(arVM: arVM, item: item)
             }
         }
     }
@@ -57,7 +54,6 @@ struct ExtractedView: View {
     @EnvironmentObject var arVM: ARViewModel
     var body: some View {
         VStack {
-            Text(modelName ?? "nil")
             USDZQuickLook(modelName: item.modelName)
                 .frame(height: geom.size.height / 2)
                 .ignoresSafeArea(edges: [.top])
@@ -89,23 +85,13 @@ struct ExtractedView: View {
                 .padding(.vertical)
                 
                 Spacer()
-                Button("Place") {
-                    
-                }
-                .font(.title2)
-                .foregroundStyle(.white)
-                .frame(height: 55)
-                .frame(maxWidth: .infinity)
-                .background(.black)
-                .clipShape(RoundedRectangle(cornerRadius: 15))
                 
             }
             .padding(.horizontal)
-//            .onAppear {
-//                modelName = item.modelName
-//            }
+
             
         }
+        .ignoresSafeArea()
        
     }
 }
