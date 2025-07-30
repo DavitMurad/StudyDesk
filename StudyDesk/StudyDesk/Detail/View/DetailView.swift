@@ -15,7 +15,6 @@ struct DetailView: View {
     var currentItem: ARItem?
     var body: some View {
         GeometryReader { geom in
-            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 0) {
                     ForEach(detailVM.modifiedItem) { item in
@@ -23,6 +22,7 @@ struct DetailView: View {
                             .environmentObject(detailVM)
                             .environmentObject(arVM)
                             .frame(width: geom.size.width)
+                            .toolbar(.hidden, for: .tabBar)
                     }
                 }
                 .scrollTargetLayout()
@@ -38,11 +38,6 @@ struct DetailView: View {
         }
     }
 }
-
-//#Preview {
-//    DetailView()
-//        .environmentObject(ARViewModel())
-//}
 
 struct ExtractedView: View {
 
@@ -72,26 +67,24 @@ struct ExtractedView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
                     .minimumScaleFactor(0.7)
-//                    .padding(.vertical)
+           
                 
-                HStack {
-                    Text("Favourite")
-                        .font(.title2)
-                    Spacer()
-                    Image(systemName: "heart.fill")
-                        .foregroundStyle(.red)
+                Button {
+                    arVM.like(item: item)
+                } label: {
+                    Image(systemName: item.liked ? "heart.fill" : "heart")
+                        .foregroundColor(item.liked ? .red : .gray)
                         .font(.title)
                 }
                 .padding(.vertical)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 
+                Text("Scroll to see more items")
+                    .font(.caption)
                 Spacer()
                 
             }
             .padding(.horizontal)
-
-            
         }
-        .ignoresSafeArea()
-       
     }
 }

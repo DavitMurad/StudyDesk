@@ -19,8 +19,6 @@ struct ARMainView: View {
             
 
             VStack {
-         
-
                 HStack {
                     Button(action: {
                         dismiss()

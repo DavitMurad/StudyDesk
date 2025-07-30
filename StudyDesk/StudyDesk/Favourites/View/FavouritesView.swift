@@ -16,6 +16,7 @@ struct FavouritesView: View {
                 ForEach(arVM.favouritesVM.favoritesItems) { fav in
                     HStack {
                         Image(systemName: fav.image)
+                            .foregroundStyle(Color("CustomBlue"))
                             .frame(width: 40, height: 40)
                             .background(Color.white)
                             .clipShape(Circle())

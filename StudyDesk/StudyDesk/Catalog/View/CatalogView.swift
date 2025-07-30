@@ -43,7 +43,7 @@ struct CatalogView: View {
                                         .fill(.white)
                                         .shadow(color: .black.opacity(0.05), radius: 6, x: 0, y: 4)
                                 )
-                                .rotation3DEffect(.degrees(itemAngle), axis: (x: 1, y: 0, z: 0))
+                                .rotation3DEffect(.degrees(itemAngle), axis: (x: 0 , y: 1, z: 0))
                                 .overlay(
                                     
                                     Button {
