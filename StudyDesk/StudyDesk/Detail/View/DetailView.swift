@@ -13,12 +13,13 @@ struct DetailView: View {
     @StateObject var detailVM = DetailViewModel()
     @State var modelName: String? = nil
     var currentItem: ARItem?
+    
     var body: some View {
         GeometryReader { geom in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 0) {
-                    ForEach(detailVM.modifiedItem) { item in
-                        ExtractedView(geom: geom, item: item, modelName: $modelName)
+                    ForEach($detailVM.modifiedItem) { $item in
+                        ExtractedView(geom: geom, item: $item)
                             .environmentObject(detailVM)
                             .environmentObject(arVM)
                             .frame(width: geom.size.width)
@@ -42,8 +43,7 @@ struct DetailView: View {
 struct ExtractedView: View {
 
     let geom: GeometryProxy
-    let item: ARItem
-    @Binding var modelName: String?
+    @Binding var item: ARItem
     
     @EnvironmentObject var catalogVM: CatalogViewModel
     @EnvironmentObject var arVM: ARViewModel
@@ -68,8 +68,8 @@ struct ExtractedView: View {
                     .multilineTextAlignment(.leading)
                     .minimumScaleFactor(0.7)
            
-                
                 Button {
+                    item.liked.toggle()
                     arVM.like(item: item)
                 } label: {
                     Image(systemName: item.liked ? "heart.fill" : "heart")
@@ -79,7 +79,7 @@ struct ExtractedView: View {
                 .padding(.vertical)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Text("Scroll to see more items")
+                Text("Scroll **right** or **left** to see more items")
                     .font(.caption)
                 Spacer()
                 

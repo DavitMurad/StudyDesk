@@ -55,12 +55,16 @@ struct PlaceLauncherView: View {
                 }
             }
         }
+        .onAppear(perform: {
+            NotificationManager.shared.requestAuthorization()
+            NotificationManager.shared.scheduleNotifications()
+        })
         .fullScreenCover(isPresented: $showAR) {
             ARMainView()
         }
     }
 }
 
-#Preview {
-    PlaceLauncherView()
-}
+//#Preview {
+//    PlaceLauncherView()
+//}

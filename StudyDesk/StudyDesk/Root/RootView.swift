@@ -15,7 +15,6 @@ struct RootView: View {
             }
             Tab("Catalog", systemImage: "square.grid.2x2") {
                 CatalogView()
-                    .environmentObject(ARViewModel())
             }
             Tab("Favourites", systemImage: "heart.fill") {
                 FavouritesView()
@@ -27,6 +26,7 @@ struct RootView: View {
     }
 }
 
-#Preview {
-    RootView()
-}
+//#Preview {
+//    RootView()
+//}
+

@@ -10,9 +10,22 @@
 		27308E892E2837B400A4867A /* StudyDesk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyDesk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		27E0E75D2E3A609000A598A3 /* Exceptions for "StudyDesk" folder in "StudyDesk" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 27308E882E2837B400A4867A /* StudyDesk */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		273092442E304C1C00A4867A /* StudyDesk */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				27E0E75D2E3A609000A598A3 /* Exceptions for "StudyDesk" folder in "StudyDesk" target */,
+			);
 			path = StudyDesk;
 			sourceTree = "<group>";
 		};

@@ -46,10 +46,7 @@ class ARViewModel: ObservableObject {
     }
     
     func like(item: ARItem) {
-        var copyItem = item
-        copyItem.liked.toggle()
-        
-        if copyItem.liked {
+        if item.liked {
             favouritesVM.addItemById(item.id)
         } else {
             favouritesVM.deleteItemByID(item.id)

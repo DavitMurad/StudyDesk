@@ -31,10 +31,11 @@ struct CatalogSheet: View {
                         
                         HStack {
                             Image(systemName: item.image)
+                                .foregroundStyle(Color("CustomBlue"))
                                 .frame(width: 50, height: 50)
                                 .background(.white)
                                 .clipShape(Circle())
-                                .shadow(radius: 5)
+                                .shadow(radius: 2)
                                 .padding()
                                 .padding(.horizontal, 10)
                             

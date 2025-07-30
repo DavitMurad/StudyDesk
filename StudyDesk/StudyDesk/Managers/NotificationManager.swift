@@ -47,5 +47,11 @@ class NotificationManager {
         dateComponents.hour = 10
         dateComponents.minute = 0
         
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request)
+
+        
     }
 }

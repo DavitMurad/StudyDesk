@@ -21,7 +21,7 @@ struct CatalogView: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 20) {
                     Section {
-                        ForEach(arVM.items) { item in
+                        ForEach($arVM.items) { $item in
                             NavigationLink {
                                 DetailView(currentItem: item)
                             } label: {
@@ -45,11 +45,10 @@ struct CatalogView: View {
                                 )
                                 .rotation3DEffect(.degrees(itemAngle), axis: (x: 0 , y: 1, z: 0))
                                 .overlay(
-                                    
                                     Button {
+                                        item.liked.toggle()
                                         arVM.like(item: item)
                                     } label: {
-                                        
                                         Image(systemName: item.liked ? "heart.fill" : "heart")
                                             .foregroundColor(item.liked ? .red : .gray)
                                     }
