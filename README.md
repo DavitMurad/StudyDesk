@@ -63,7 +63,7 @@ What began as a lighthearted idea turned into a technical deep dive, touching ev
 
   Design with modularity in mind: from fetch logic to **environment object injection**
 
-  Make** Combine timers ** and **publishers** behave predictably within SwiftUI's lifecycle
+  Make **Combine timers** and **publishers** behave predictably within SwiftUI's lifecycle
 
   Use **Reality Composer Pro** for the first time to manually center and scale .usdz models
 
