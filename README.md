@@ -1,4 +1,6 @@
 # StudyDesk
+https://github.com/user-attachments/assets/331f264e-47d1-46d7-aa0c-55d0a2bdf48f
+
 # About 🤌
 
 StudyDesk is a project that blends fun, learning, and a celebration of everyday student life, visualised through 3D models of familiar objects.
@@ -47,8 +49,13 @@ What began as a lighthearted idea turned into a technical deep dive, touching ev
 
 📬 Local push notifications – for reminders and (let’s be honest) more sarcasm
 
+<img width="306" height="51" alt="Screenshot 2025-08-01 at 17 16 36" src="https://github.com/user-attachments/assets/211b606b-aec9-4608-b8b7-1ea3760f910f" />
+
+<img width="310" height="52" alt="Screenshot 2025-08-01 at 17 16 26" src="https://github.com/user-attachments/assets/332e4893-2a66-4149-a88c-0284dd0c613a" />
+
 
 # Challenges & Learnings
+
 
   Build a custom **ARViewContainer** with plane detection and gesture handling
 
