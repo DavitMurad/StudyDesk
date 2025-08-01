@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct ARMainView: View {
+    @EnvironmentObject var arVM: ARViewModel
     @State private var isSheetPresented = false
     @State private var modelName: String? = nil
     @Environment(\.dismiss) private var dismiss
-
+    
+    @State var count = 10
+    @State var finishedText: String? = nil
     var body: some View {
         ZStack {
             ARViewContainer(modelName: $modelName)
                 .ignoresSafeArea()
             
-
             VStack {
                 HStack {
                     Button(action: {
@@ -39,10 +41,18 @@ struct ARMainView: View {
                         .background(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .opacity(modelName == nil ? 1:0)
-                        
                 }
                 .padding(.top, 50)
                 .padding(.horizontal)
+                
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(Color.secondary)
+                    .frame(width: 50, height: 50)
+                    .padding()
+                    .overlay {
+                        Text(finishedText ?? "\(count)")
+                    }
+                    .opacity(modelName == "Coffee" ? 1 : 0)
 
                 Spacer()
             }
@@ -65,13 +75,21 @@ struct ARMainView: View {
                 }
             }
         }
+        .onReceive(ARViewContainer.timerPublisher) { _ in
+            if count <= 1 {
+                finishedText = "Get back to work! Your play time is over."
+                ARViewContainer.stopTimer()
+            } else {
+                count -= 1
+            }
+        }
         .sheet(isPresented: $isSheetPresented) {
             CatalogSheet(modelName: $modelName)
         }
+        .onDisappear {
+            for index in arVM.items.indices {
+                arVM.items[index].selected = false
+            }
+        }
     }
 }
-
-
-//#Preview {
-//    ARMainView()
-//}

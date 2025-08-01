@@ -27,16 +27,16 @@ class ModelFetcher {
         }
         
         if let url = Bundle.main.url(forResource: name, withExtension: "json") {
-                   return Just(url)
-                       .tryMap { url -> Data in
-                           let data = try Data(contentsOf: url)
-                           CacheManager.shared.set(data: data, key: name)
-                           return data
-                       }
-                       .eraseToAnyPublisher()
-               }
-               
-               return Fail(error: URLError(.fileDoesNotExist))
-                   .eraseToAnyPublisher()
-           }
+            return Just(url)
+                .tryMap { url -> Data in
+                    let data = try Data(contentsOf: url)
+                    CacheManager.shared.set(data: data, key: name)
+                    return data
+                }
+                .eraseToAnyPublisher()
+        }
+        
+        return Fail(error: URLError(.fileDoesNotExist))
+            .eraseToAnyPublisher()
+    }
 }

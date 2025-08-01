@@ -43,15 +43,13 @@ class NotificationManager {
         content.sound = .default
         
         var dateComponents = DateComponents()
-        dateComponents.day = 1
+        dateComponents.weekday = 2
         dateComponents.hour = 10
         dateComponents.minute = 0
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "weeklyMondayReminder", content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request)
-
-        
     }
 }

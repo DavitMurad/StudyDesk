@@ -9,10 +9,13 @@ import Foundation
 import SwiftUI
 import RealityKit
 import ARKit
+import Combine
 
 
 struct ARViewContainer: UIViewRepresentable {
     @Binding var modelName: String?
+    static let timerPublisher = PassthroughSubject<Void, Never>()
+    private static var timerCancellable: AnyCancellable?
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero)
@@ -21,6 +24,8 @@ struct ARViewContainer: UIViewRepresentable {
         config.planeDetection = [.horizontal]
         arView.session.run(config)
     
+        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handleTap(_:)))
+           arView.addGestureRecognizer(tapGesture)
         context.coordinator.arView = arView
         
         return arView
@@ -53,6 +58,7 @@ struct ARViewContainer: UIViewRepresentable {
                 let anchor = AnchorEntity(world: firstResult.worldTransform)
                 anchor.addChild(entity)
                 uiView.scene.anchors.append(anchor)
+                
             } catch {
                 print(error)
             }
@@ -61,6 +67,21 @@ struct ARViewContainer: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator()
     }
+    
+    static func startTimer() {
+           stopTimer()
+           
+           timerCancellable = Timer.publish(every: 1.0, on: .main, in: .common)
+               .autoconnect()
+               .sink { _ in
+                   timerPublisher.send()
+               }
+       }
+       
+       static func stopTimer() {
+           timerCancellable?.cancel()
+           timerCancellable = nil
+       }
     
     class Coordinator {
         var arView: ARView?
@@ -75,6 +96,24 @@ struct ARViewContainer: UIViewRepresentable {
         func pauseARSession() {
             arView?.session.pause()
         }
+        
+        @objc func handleTap(_ gesture: UITapGestureRecognizer) {
+                   guard let arView = arView else { return }
+                   
+                   let location = gesture.location(in: arView)
+                   
+                   if let entity = arView.entity(at: location) {
+                       if entity.name == "cup_cup_0" {
+                           print("Cup tapped - starting timer")
+                           ARViewContainer.startTimer()
+                       }
+                   }
+               }
+        
+        func trigger() {
+            
+        }
+        
     }
     
     static func dismantleUIView(_ uiView: ARView, coordinator: Coordinator) {

@@ -8,9 +8,9 @@
 import Foundation
 
 class DetailViewModel: ObservableObject {
-   @Published var modifiedItem: [ARItem] = []
+    @Published var modifiedItem: [ARItem] = []
     
-    func determineCurrentView(arVM: ARViewModel,item: ARItem) {
+    func determineCurrentView(arVM: ARViewModel, item: ARItem) {
         var modifiedItems = arVM.items
         modifiedItems.removeAll(where: {$0 == item})
         modifiedItems.insert(item, at: 0)

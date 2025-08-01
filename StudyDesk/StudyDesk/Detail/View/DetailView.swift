@@ -12,14 +12,15 @@ struct DetailView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var detailVM = DetailViewModel()
     @State var modelName: String? = nil
+    @State private var currentIndex = 0
     var currentItem: ARItem?
     
     var body: some View {
         GeometryReader { geom in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 0) {
-                    ForEach($detailVM.modifiedItem) { $item in
-                        ExtractedView(geom: geom, item: $item)
+                    ForEach(Array($detailVM.modifiedItem.enumerated()), id: \.element.id) { index, $item in
+                        ItemView(geom: geom, item: $item, currentIndex: index)
                             .environmentObject(detailVM)
                             .environmentObject(arVM)
                             .frame(width: geom.size.width)
@@ -35,56 +36,12 @@ struct DetailView: View {
             if let item = currentItem, detailVM.modifiedItem.isEmpty {
                 modelName = item.modelName
                 detailVM.determineCurrentView(arVM: arVM, item: item)
-            }
-        }
-    }
-}
-
-struct ExtractedView: View {
-
-    let geom: GeometryProxy
-    @Binding var item: ARItem
-    
-    @EnvironmentObject var catalogVM: CatalogViewModel
-    @EnvironmentObject var arVM: ARViewModel
-    var body: some View {
-        VStack {
-            USDZQuickLook(modelName: item.modelName)
-                .frame(height: geom.size.height / 2)
-                .ignoresSafeArea(edges: [.top])
-            
-            Group {
-                Text(item.displayName)
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Rectangle()
-                    .frame(height: 1)
-                
-                Text(item.description)
-                    .font(.caption)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .multilineTextAlignment(.leading)
-                    .minimumScaleFactor(0.7)
-           
-                Button {
-                    item.liked.toggle()
-                    arVM.like(item: item)
-                } label: {
-                    Image(systemName: item.liked ? "heart.fill" : "heart")
-                        .foregroundColor(item.liked ? .red : .gray)
-                        .font(.title)
+                if let index = detailVM.modifiedItem.firstIndex(where: { $0.id == item.id }) {
+                    currentIndex = index
                 }
-                .padding(.vertical)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Text("Scroll **right** or **left** to see more items")
-                    .font(.caption)
-                Spacer()
-                
             }
-            .padding(.horizontal)
         }
     }
 }
+

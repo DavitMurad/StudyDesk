@@ -22,7 +22,7 @@ class FavouritesViewModel: ObservableObject {
             }
         }
         fetchItemsByID()
-
+        
     }
     
     func fetchItemsByID() {
@@ -63,5 +63,5 @@ class FavouritesViewModel: ObservableObject {
             favourites.contains(where: { $0.id == item.id })
         }
     }
-
+    
 }

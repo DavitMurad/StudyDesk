@@ -6,6 +6,7 @@
     "audio": null,
     "image": "macbook.gen2",
     "liked": false,
+    "selected": false,
     "description": "Your digital everything. From 8 a.m. lectures to 2 a.m. debugging sessions, this is the hub of every student hustle."
   },
   {
@@ -15,6 +16,7 @@
     "audio": null,
     "image": "cup.and.saucer.fill",
     "liked": false,
+    "selected": false,
     "description": "For those “just one more chapter” or “just one more hour” moments. A little caffeine magic to survive 9 a.m. classes and late-night grind sessions."
   },
   {
@@ -24,6 +26,7 @@
     "audio": null,
     "image": "pencil.and.list.clipboard",
     "liked": false,
+    "selected": false,
     "description": "Some ideas are better written by hand. Whether it’s messy sketches, lecture notes, or deep thoughts during a boring seminar, this little guy’s got your back."
   },
   {
@@ -33,6 +36,7 @@
     "audio": null,
     "image": "iphone.gen3",
     "liked": false,
+    "selected": false,
     "description": "Your second brain, group chat HQ, and emergency deadline reminder. Try not to scroll too long during study breaks."
   },
   {
@@ -42,6 +46,7 @@
     "audio": null,
     "image": "airpods.pro.chargingcase.wireless.fill",
     "liked": false,
+    "selected": false,
     "description": "Not just for vibing in the library, these are noise-cancelling shields from chaos. Use them wisely (and don’t lose the case)."
   },
   {
@@ -51,6 +56,7 @@
     "audio": null,
     "image": "pencil.and.scribble",
     "liked": false,
+    "selected": false,
     "description": "The underrated hero of your backpack. Doesn’t need charging, doesn’t crash, and always there when you panic mid-exam."
     
   }

@@ -46,48 +46,50 @@ struct CatalogView: View {
                                 .rotation3DEffect(.degrees(itemAngle), axis: (x: 0 , y: 1, z: 0))
                                 .overlay(
                                     Button {
+                                        HapticManager.shared.impact(style: .soft)
                                         item.liked.toggle()
                                         arVM.like(item: item)
                                     } label: {
                                         Image(systemName: item.liked ? "heart.fill" : "heart")
                                             .foregroundColor(item.liked ? .red : .gray)
                                     }
-                                    .padding(8),
+                                        .padding(10),
                                     alignment: .topTrailing
                                 )
                             }
                         }
                     } header: {
-                        HStack {
-                            Text("Catalog")
-                                .font(.largeTitle).bold()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.bottom, 10)
-                            
-                            Button("Randomize") {
-                                withAnimation(.easeInOut(duration: 0.6)) {
-                                    arVM.items = arVM.items.shuffled()
-                                    itemAngle = 360
-                                }
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                    itemAngle = 0
-                                }
+                        
+                        Button {
+                            HapticManager.shared.impact(style: .medium)
+
+                            withAnimation(.easeInOut(duration: 0.6)) {
+                                arVM.items = arVM.items.shuffled()
+                                itemAngle = 360
                             }
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                itemAngle = 0
+                            }
+                            
+                        } label: {
+                            Label("Randomise", systemImage: "shuffle.circle.fill")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 10)
+                                .background(Color("CustomBlue"))
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                     }
+                 
                 }
                 .padding()
-                .background(Color(.systemGroupedBackground).ignoresSafeArea())
-                .toolbar(.hidden)
+                .background(Color(.systemGroupedBackground))
                 
             }
+            .navigationTitle("Catalog")
         }
         .environmentObject(arVM)
     }
 }
-
-
-//#Preview {
-//    CatalogView()
-//}

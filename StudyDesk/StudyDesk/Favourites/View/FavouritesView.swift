@@ -45,6 +45,7 @@ struct FavouritesView: View {
                             
                             Button {
                                 if let index = arVM.items.firstIndex(where: { $0.id == fav.id }) {
+                                    HapticManager.shared.impact(style: .soft)
                                     arVM.items[index].liked.toggle()
                                     arVM.like(item: arVM.items[index])
                                 }
@@ -58,6 +59,7 @@ struct FavouritesView: View {
                     }
                     .onDelete(perform: delete)
                 }
+
                 .navigationTitle("Favourites")
             }
         }
@@ -74,7 +76,3 @@ struct FavouritesView: View {
         }
     }
 }
-
-//#Preview {
-//    FavouritesView()
-//}

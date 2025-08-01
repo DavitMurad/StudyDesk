@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct CatalogSheet: View {
-    @ObservedObject private var ARvm = ARViewModel()
+    @EnvironmentObject var arVM: ARViewModel
     @Binding var modelName: String?
     @Environment(\.dismiss) private var dismiss
-    
     var body: some View {
         VStack {
             Text("Find a table. No, your knees don't count. AR is not that advanced yet.")
@@ -20,7 +19,7 @@ struct CatalogSheet: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
             LazyVStack {
-                ForEach(ARvm.items) { item in
+                ForEach($arVM.items) { $item in
                     ZStack {
                         RoundedRectangle(cornerRadius: 15)
                             .fill(Color.white)
@@ -44,11 +43,18 @@ struct CatalogSheet: View {
                                 .font(.headline)
                             Spacer()
                             
+                            Image(systemName: "chevron.down")
+                                .font(.title)
+                                .foregroundStyle(Color("CustomBlue"))
+                                .opacity(item.selected ? 1.0 : 0.0)
+                                .padding()
+                                .padding(.horizontal)
                         }
                         
                     }
                     .onTapGesture {
                         modelName = item.modelName
+                        item.selected = true
                         dismiss()
                     }
                 }

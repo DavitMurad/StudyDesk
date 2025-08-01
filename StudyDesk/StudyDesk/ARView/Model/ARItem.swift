@@ -14,5 +14,6 @@ struct ARItem: Identifiable, Codable, Equatable {
     let audio: String?
     let image: String
     var liked: Bool
+    var selected: Bool
     let description: String
 }
