@@ -47,10 +47,11 @@ struct ARMainView: View {
                 
                 RoundedRectangle(cornerRadius: 5)
                     .fill(Color.secondary)
-                    .frame(width: 50, height: 50)
+                    .frame(height: 50)
                     .padding()
                     .overlay {
                         Text(finishedText ?? "\(count)")
+                            .padding(.horizontal)
                     }
                     .opacity(modelName == "Coffee" ? 1 : 0)
 
